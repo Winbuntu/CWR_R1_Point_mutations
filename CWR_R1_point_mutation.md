@@ -21,6 +21,26 @@ samtools view -b 16C-1_S101_L008_R1_001.fastq.gz_bwa_align_sorted_gpied_dedup_re
 samtools index TP53_one_point.bam
 ```
 
+## Visualize AR gene
+
+```
+samtools view -b 16C-1_S101_L008_R1_001.fastq.gz_bwa_align_sorted_gpied_dedup_realign.bam  "chrX:67,544,623-67,730,619" > AR.bam
+samtools index AR.bam
+# per base coverage
+samtools depth -r chrX:67,544,623-67,730,619 AR.bam > AR_perbase_cov.txt
+
+```
+It is difficult to identify breakpoint manully. 
+
+Try use Delly2 to identify breakpoint first. Here is the code to run delly DEL calling on AR region.
+
+```
+sh ./delly2_code.sh AR_region AR.bam
+```
+The result is not very good. Although I can detect a deletion, but it is not at the correct positon.
+
+Draw coverage plot using 
+Conclusion: 
 
 ##Call mutations on X chromosome, compare against reference paper
 
