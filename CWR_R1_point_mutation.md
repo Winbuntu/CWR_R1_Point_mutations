@@ -39,8 +39,9 @@ sh ./delly2_code.sh AR_region AR.bam
 ```
 The result is not very good. Although I can detect a deletion, but it is not at the correct positon.
 
-Draw coverage plot using 
-Conclusion: 
+Draw coverage plot using **AR\_cov.R**
+
+Conclusion: Dominant subpopulation can change depends on culture condition.
 
 ##Call mutations on X chromosome, compare against reference paper
 
@@ -48,3 +49,14 @@ Conclusion:
 Supplementary table contatins point mutations identified by trageted genome sequencing.
 
 1. Download human reference genome hg19
+2. Re-align reads using hg19. (**Map\_and\_call\_hg19.sh**)
+
+```
+bgrun -m a -n CWR_hg19 "sh ./Map_and_call_hg19.sh 16C-1_S101_L008_R1_001.fastq.gz 16C-1_S101_L008_R2_001.fastq.gz 256"
+	
+```
+
+3. Use heplotype caller to identify mutations on AR region.
+	```
+	bgrun -m a -n CallCWR_AR "sh ./Call_variant.sh 16C-1_S101_L008_R1_001.fastq.gz_hg19_bwa_align_sorted_gpied_dedup_realign.bam"
+	```
