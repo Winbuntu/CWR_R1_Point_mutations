@@ -84,7 +84,7 @@ GATK="/home/qan/GenomeAnalysisTK-3.6/GenomeAnalysisTK.jar"
 
 /home/qan/jdk1.8.0_77/bin/java  -jar $GATK -T  HaplotypeCaller \
 	-R /labshares/fanlab/anqin/REF/Hg19/Homo_sapiens/UCSC/hg19/Sequence/WholeGenomeFasta/genome.fa \
-	-I ${1}_bwa_align_sorted_gpied_dedup_realign.bam \
+	-I ${1} \
 	-L chrX \
 	-o ${1}.chrX.raw_variants.vcf
 

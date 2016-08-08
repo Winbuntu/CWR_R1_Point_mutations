@@ -60,3 +60,17 @@ bgrun -m a -n CWR_hg19 "sh ./Map_and_call_hg19.sh 16C-1_S101_L008_R1_001.fastq.g
 	```
 	bgrun -m a -n CallCWR_AR "sh ./Call_variant.sh 16C-1_S101_L008_R1_001.fastq.gz_hg19_bwa_align_sorted_gpied_dedup_realign.bam"
 	```
+	
+	```
+	#get mutation numbers in ar region in my list
+	cat 16C-1_S101_L008_R1_001.fastq.gz_hg19_bwa_align_sorted_gpied_dedup_realign.bam.chrX.raw_variants.vcf | grep -v "^#" | cut -f 1,2 > my.SNVs.txt
+	vim published.SNVs.txt
+	cat my.SNVs.txt | sort | uniq | sort > a_u.txt
+	cat published.SNVs.txt | sort | uniq | sort > b_u.txt
+	
+	# shared mutations
+	comm -12  a_u.txt  b_u.txt > c.txt
+	
+	# count bases in AR greion
+	cat 16C-1_S101_L008_R1_001.fastq.gz_hg19_bwa_align_sorted_gpied_dedup_realign.bam.chrX.raw_variants.vcf | grep -v "^#"|  awk ' {if ($2 >= 66764055 && $2 <= 66944119)  print }' | wc -l
+	```
